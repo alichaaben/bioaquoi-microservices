@@ -1,0 +1,54 @@
+
+@startuml
+
+class User {
+  + userId: String
+  + name: String
+  + email: String
+  + role: String
+  --
+  + registerUser(): void
+  + login(): boolean
+}
+
+class Roles {
+  + RoleId: String
+  + RoleName: String
+  --
+  + createRoles(): void
+}
+
+class Project {
+  + projectId: String
+  + projectName: String
+  + status: String
+  --
+  + createProject(): void
+  + assignUser(userId: String): void
+}
+
+class componenets {
+  + materialId: String
+  + projectId: String
+  + usageQuantity: int
+  + quantity_in_stock: int
+  --
+  + allocateMaterial(): void
+}
+
+class Billing {
+  + billingId: String
+  + projectId: String
+  + totalAmount: double
+  --
+  + generateInvoice(): void
+}
+
+
+User "1" --> "1" Roles : has roles
+User "1" --> "*" Billing : has
+Project "1" --> "*" Billing : has
+User "1" --> "*" Project : works on
+Project "*" --> "*" componenets : uses
+
+@enduml
