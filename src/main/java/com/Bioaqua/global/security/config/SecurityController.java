@@ -53,7 +53,7 @@ public Map<String, String> login(@RequestParam String userName, @RequestParam St
     
     JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
         .issuedAt(instant)
-        .expiresAt(instant.plus(2, ChronoUnit.MINUTES))
+        .expiresAt(instant.plus(15, ChronoUnit.MINUTES))
         .subject(userName)
         .claim("scope", scope)
         .build();

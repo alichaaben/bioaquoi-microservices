@@ -2,6 +2,7 @@ package com.Bioaqua.global.controller;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,6 +35,8 @@ public class UsersController {
     private UsersMapper usersMapper;
     @Autowired
     private RolesRepo rolesRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
 
     @GetMapping("/{id}")
@@ -58,8 +61,13 @@ public class UsersController {
             throw new ResourceNotFoundException("Role non trouvé avec le nom: " + usersDto.getRoleName());
         }
 
+
         Users users = usersMapper.unMap(usersDto);
         users.setRole(role);
+        String hashedPassword = passwordEncoder.encode(users.getPassword());
+        users.setPassword(hashedPassword);
+
+        
         
         Users savedUsers = usersService.insert(users);
         UsersDto savedUsersDto = usersMapper.map(savedUsers);
