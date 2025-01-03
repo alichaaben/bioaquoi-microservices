@@ -52,3 +52,11 @@ User "1" --> "*" Project : works on
 Project "*" --> "*" componenets : uses
 
 @enduml
+
+
+Résumé des relations
+User → Roles : Plusieurs utilisateurs peuvent avoir un rôle (ManyToOne).
+User → Project : Un utilisateur peut travailler sur plusieurs projets (OneToMany).
+User → Billing : Un utilisateur peut avoir plusieurs factures (OneToMany).
+Project → Billing : Un projet peut être associé à plusieurs factures (OneToMany).
+Project → Components : Un projet peut utiliser plusieurs composants (OneToMany).
